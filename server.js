@@ -16,23 +16,10 @@ const passwordRoutes = require("./routes/passwordRoutes");
 
 const app = express();
 
-// CORS configuration for local frontend development
-app.use(cors({
-    origin: (origin, callback) => {
-        if (
-            !origin ||
-            /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) ||
-            origin === "http://13.203.210.168:5001"
-        ) {
-            return callback(null, true);
-        }
+// CORS
+app.use(cors());
 
-        return callback(new Error("Origin not allowed by CORS"));
-    },
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+// Request logger
 app.use((req, res, next) => {
     console.log("REQUEST:", req.method, req.url);
     next();
@@ -40,8 +27,10 @@ app.use((req, res, next) => {
 
 // Body parsers
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+
+// Serve frontend
+app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -57,6 +46,7 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+// Database connection and server start
 sequelize
     .sync()
     .then(() => {
