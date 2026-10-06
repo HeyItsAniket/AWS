@@ -21,7 +21,8 @@ app.use(cors({
     origin: (origin, callback) => {
         if (
             !origin ||
-            /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+            /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin) ||
+            origin === "http://13.203.210.168:5001"
         ) {
             return callback(null, true);
         }
