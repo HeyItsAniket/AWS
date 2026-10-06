@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <p id="welcomeMessage" class="welcome-message"></p>
+        <h1>Daily Expense Tracker</h1>
+
+
+        <!-- Add Expense -->
+
+        <div class="expense-form-section">
+
+            <h2>Add Expense</h2>
+
+            <form id="expenseForm">
+
+                <div>
+                    <label for="amount">
+                        Amount
+                    </label>
+
+                    <input
+                        type="number"
+                        id="amount"
+                        placeholder="Enter amount"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <input
+                        type="text"
+                        id="description"
+                        placeholder="What did you spend on?"
+                        required
+                    >
+                </div>
+
+
+                <button type="submit">
+                    Add Expense
+                </button>
+
+            </form>
+
+
+            <p id="expenseMessage"></p>
+
+        </div>
+
+
+
+        <!-- Expenses -->
+
+        <div class="expense-list-section">
+
+            <h2>My Expenses</h2>
+
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="expenseTableBody">
+
+                </tbody>
+
+            </table>
+
+
+
+            <!-- Pagination -->
+
+            <div
+                id="expensePagination"
+                class="expense-pagination"
+                style="display: none;"
+            >
+
+                <!-- Rows per page -->
+
+                <div class="rows-per-page">
+
+                    <label for="rowsPerPage">
+                        Rows per page:
+                    </label>
+
+                    <select id="rowsPerPage">
+
+                        <option value="5">
+                            5
+                        </option>
+
+                        <option value="10" selected>
+                            10
+                        </option>
+
+                        <option value="20">
+                            20
+                        </option>
+
+                        <option value="30">
+                            30
+                        </option>
+
+                        <option value="40">
+                            40
+                        </option>
+
+                        <option value="50">
+                            50
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- Page information -->
+
+                <span id="pageInfo">
+                    1-10 of 10
+                </span>
+
+
+
+                <!-- Previous -->
+
+                <button
+                    type="button"
+                    id="previousPageButton"
+                >
+                    ‹
+                </button>
+
+
+
+                <!-- Next -->
+
+                <button
+                    type="button"
+                    id="nextPageButton"
+                >
+                    ›
+                </button>
+
+            </div>
+
+        </div>
+
+<!-- Premium Payment -->
+<div id="paymentSection">
+    <h2>Premium Membership</h2>
+
+    <p>Unlock Premium reports and leaderboard access for ₹1.</p>
+
+    <label for="paymentPhone">Mobile number</label>
+    <input
+        type="tel"
+        id="paymentPhone"
+        inputmode="numeric"
+        autocomplete="tel"
+        pattern="[0-9]{10}"
+        maxlength="10"
+        placeholder="10-digit mobile number"
+        required
+    >
+
+    <button type="button" id="paymentButton">
+        Pay ₹1 with Cashfree
+    </button>
+
+    <p id="premiumMessage"></p>
+</div>
+
+        <!-- Premium Reports -->
+
+        <div
+            id="premiumReportsSection"
+            class="premium-reports-section"
+            style="display: none;"
+        >
+
+            <div class="report-header">
+                <h2>Premium Reports</h2>
+                <span class="premium-badge">Premium</span>
+            </div>
+
+            <div class="report-controls">
+                <div class="report-period-buttons">
+                    <button type="button" class="period-button active" data-period="daily">Daily</button>
+                    <button type="button" class="period-button" data-period="weekly">Weekly</button>
+                    <button type="button" class="period-button" data-period="monthly">Monthly</button>
+                </div>
+
+                <button type="button" id="downloadReportButton" class="download-report-button">
+                    Download Report
+                </button>
+
+                <button type="button" id="downloadExpensesButton" class="download-report-button">
+                    Download My Expenses
+                </button>
+            </div>
+
+            <div id="reportPremiumLock" class="report-premium-lock" style="display: none;">
+                <div class="lock-icon">🔒</div>
+                <h3>Premium feature</h3>
+                <p>Upgrade to Premium to see your reports.</p>
+            </div>
+
+            <div id="reportContent">
+
+                <div class="report-period-title">
+                    <h3 id="reportPeriodTitle">Daily Report</h3>
+                    <span id="reportDateRange"></span>
+                </div>
+
+                <div class="report-table-wrapper">
+                    <table class="financial-report-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Income</th>
+                                <th>Expense</th>
+                            </tr>
+                        </thead>
+                        <tbody id="financialReportBody"></tbody>
+                        <tfoot>
+                            <tr class="report-total-row">
+                                <td colspan="3">Total</td>
+                                <td id="reportTotalIncome"></td>
+                                <td id="reportTotalExpense"></td>
+                            </tr>
+                            <tr class="savings-row">
+                                <td colspan="4">Savings</td>
+                                <td id="reportSavings"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="yearly-report">
+                    <h3>Yearly Report</h3>
+                    <div class="report-table-wrapper">
+                        <table class="financial-report-table">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Income</th>
+                                    <th>Expense</th>
+                                    <th>Savings</th>
+                                </tr>
+                            </thead>
+                            <tbody id="yearlyReportBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="notes-report">
+                    <h3>Notes</h3>
+                    <table class="financial-report-table">
+                        <tbody id="notesReportBody"></tbody>
+                    </table>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- Leaderboard -->
+
+        <div
+            id="leaderboardSection"
+            style="display: none;"
+        >
+
+            <h2>Leaderboard</h2>
+
+            <div id="leaderboardResult">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Name</th>
+                            <th>Total Expense</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardTableBody"></tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
+        <!-- Logout -->
+
+        <button
+            type="button"
+            id="logoutButton"
+        >
+            Logout
+        </button>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
