@@ -24,7 +24,7 @@ if (signupForm) {
         try {
 
             const response = await fetch(
-                "http://localhost:5001/api/auth/signup",
+                "http://13.203.210.168:5001/api/auth/signup",
                 {
                     method: "POST",
 
@@ -87,7 +87,7 @@ if (loginForm) {
         try {
 
             const response = await fetch(
-                "http://localhost:5001/api/auth/login",
+                "http://13.203.210.168:5001/api/auth/login",
                 {
                     method: "POST",
 
@@ -209,7 +209,7 @@ if (forgotPasswordButton) {
 
                 const response =
                     await axios.post(
-                        "http://localhost:5001/password/forgotpassword",
+                        "http://13.203.210.168:5001/password/forgotpassword",
                         {
                             email: email
                         }
@@ -480,7 +480,7 @@ if (expenseForm) {
 
                     const response =
                         await fetch(
-                            "http://localhost:5001/api/expenses",
+                            "http://13.203.210.168:5001/api/expenses",
                             {
                                 method: "POST",
 
@@ -543,7 +543,7 @@ if (expenseForm) {
 
                 const response =
                     await fetch(
-                        `http://localhost:5001/api/expenses/${user.id}`
+                        `http://13.203.210.168:5001/api/expenses/${user.id}`
                     );
 
 
@@ -895,7 +895,7 @@ async function deleteExpense(
 
         const response =
             await fetch(
-                `http://localhost:5001/api/expenses/${expenseId}`,
+                `http://13.203.210.168:5001/api/expenses/${expenseId}`,
                 {
                     method: "DELETE",
 
@@ -979,7 +979,7 @@ async function reloadExpensesAfterDelete() {
 
         const response =
             await fetch(
-                `http://localhost:5001/api/expenses/${user.id}`
+                `http://13.203.210.168:5001/api/expenses/${user.id}`
             );
 
 
@@ -1105,7 +1105,7 @@ if (paymentButton) {
 
                     const response =
                         await fetch(
-                            "http://localhost:5001/api/payment/orders",
+                            "http://13.203.210.168:5001/api/payment/orders",
                             {
                                 method: "POST",
 
@@ -1191,7 +1191,7 @@ async function checkPremiumStatus() {
 
         const response =
             await fetch(
-                `http://localhost:5001/api/leaderboard/${user.id}`
+                `http://13.203.210.168:5001/api/leaderboard/${user.id}`
             );
 
 
@@ -1243,7 +1243,7 @@ async function verifyCashfreeReturn() {
 
     try {
         const response = await fetch(
-            `http://localhost:5001/api/payment/orders/${encodeURIComponent(orderId)}/verify?userId=${encodeURIComponent(user.id)}`
+            `http://13.203.210.168:5001/api/payment/orders/${encodeURIComponent(orderId)}/verify?userId=${encodeURIComponent(user.id)}`
         );
         const data = await response.json();
 
@@ -1292,7 +1292,7 @@ async function showLeaderboard() {
 
         const response =
             await fetch(
-                `http://localhost:5001/api/leaderboard/${user.id}`
+                `http://13.203.210.168:5001/api/leaderboard/${user.id}`
             );
 
 
@@ -1448,7 +1448,7 @@ if (resetPasswordForm) {
 
                 const response =
                     await axios.post(
-                        "http://localhost:5001/password/resetpassword",
+                        "http://13.203.210.168:5001/password/resetpassword",
                         {
                             resetCode:
                                 resetCode,
@@ -1655,7 +1655,7 @@ async function loadReportData() {
 
         const response =
             await axios.get(
-                `http://localhost:5001/api/expenses/${reportUser.id}`
+                `http://13.203.210.168:5001/api/expenses/${reportUser.id}`
             );
 
 
@@ -2640,7 +2640,7 @@ if (downloadExpensesButton) {
             }
 
             const response = await axios.get(
-                `http://localhost:5001/api/expenses/download/${user.id}`
+                `http://13.203.210.168:5001/api/expenses/download/${user.id}`
             );
 
             const downloadUrl = response.data.downloadUrl;
